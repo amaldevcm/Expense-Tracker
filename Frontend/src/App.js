@@ -7,10 +7,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 function App() {
-  const url = 'http://localhost:3000/api/';
+  // const url = 'http://localhost:3000/api/';
+  const url = 'https://expense-manager-uqvh.onrender.com/api/';
+
   const [allExpenses, setExpenses] = useState([]);
-  // const today = moment().startOf('day').toISOString();
-  // const [dateDisplayed, setDateDisplayed] = useState({});
   const [isEdited, setEdited] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   const [totalCash, setTotalCash] = useState(0);

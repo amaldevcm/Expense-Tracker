@@ -2,7 +2,8 @@ import { useState } from "react"
 
 function NewExpense({stateChange, edited, item}) {
     console.log(edited, item);
-    const url = 'http://localhost:3000/api/';
+    // const url = 'http://localhost:3000/api/';
+    const url = 'https://expense-manager-uqvh.onrender.com/api/';
     const [title, setTitle] = useState(edited? item.title: '');
     const [desc, setDesc] = useState(edited? item.description: '');
     const [currency, setCurrency] = useState(edited? item.currency: 'IND');
