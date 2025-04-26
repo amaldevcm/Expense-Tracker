@@ -1,101 +1,105 @@
-import { useState } from "react"
+import React, { useState } from 'react'
+import { paymentMethods } from './ExpenseTracker'
+import { CheckIcon } from 'lucide-react'
 
-function NewExpense({stateChange, edited, item}) {
-    console.log(edited, item);
-    // const url = 'http://localhost:3000/api/';
-    const url = 'https://expense-manager-uqvh.onrender.com/api/';
-    const [title, setTitle] = useState(edited? item.title: '');
-    const [desc, setDesc] = useState(edited? item.description: '');
-    const [currency, setCurrency] = useState(edited? item.currency: 'IND');
-    const [amount, setAmount] = useState(edited? item.amount: '');
-    const [payType, setPayType] = useState(edited? item.paymentType: 'cash');
+export const NewExpense = ({ onSubmit, onCancel }) => {
+  const [expense, setExpense] = useState({
+    amount: '',
+    category: '',
+    description: '',
+    paymentMethod: 'Credit Card',
+  });
 
-    function saveExpense() {
-        const data = {
-            title: title,
-            description: desc,
-            currency: currency,
-            amount: Number.parseFloat(amount),
-            paymentType: payType
-        }
+  const categories = [
+    'Groceries',
+    'Transportation',
+    'Dining',
+    'Entertainment',
+    'Shopping',
+    'Utilities',
+    'Healthcare',
+    'Education',
+    'Travel',
+    'Other',
+  ];
 
-        let requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: {}
-        }
-        
-        requestOptions.body = JSON.stringify(data)
-        fetch(url+'newExpense', requestOptions)
-                                .then((res) => {
-                                    console.log(res);
-                                    resetFields();
-                                    stateChange(true);
-                                });
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setExpense({
+      ...expense,
+      [name]: name === 'amount' ? parseFloat(value) || '' : value,
+    })
+  };
 
-    function usdToIndConversion(amount){
-        if(!amount || amount === '')
-            return 0.00;
-        return (amount*83).toFixed(2);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!expense.amount || !expense.category || !expense.description) return
 
-    function resetFields(){
-        setTitle('');
-        setDesc('');
-        setCurrency('IND');
-        setAmount('');
-        setPayType('cash');
-    }
+    onSubmit(expense)
+    setExpense({
+      amount: '',
+      category: '',
+      description: '',
+      paymentMethod: 'Credit Card',
+    });
+  };
 
-    return (
-        <>
-        <h2 className="font-bold border-b-2 border-gray-400 p-2 mb-3">New Expense</h2>
-        <div className="flex flex-col p-2">
-            <div className="flex flex-row mb-3">
-                <label className="w-1/3 mr-2">Title</label>
-                <input type="text" className="w-full h-11 border border-gray-300 outline-blue-400 rounded p-1" value={title} onChange={e => setTitle(e.target.value)}/>
+return (
+    <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+            <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span className="text-gray-500">$</span>
             </div>
-
-            <div className="flex flex-row mb-3">
-                <label className="w-1/3 mr-2">Description</label>
-                <textarea className="w-full border border-gray-300 outline-blue-400 rounded p-1" value={desc} onChange={e => setDesc(e.target.value)}/>
+            <input type="number" name="amount" value={expense.amount} onChange={handleChange} className="pl-7 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="0.00" step="0.01" min="0" required/>
             </div>
-            
-            <div className="flex flex-row mb-3">
-                <label className="w-1/3 mr-2">Currency</label>
-                <select className="w-full h-11 border border-gray-300 outline-blue-400 rounded p-1" value={currency} onChange={e => setCurrency(e.target.value)}>
-                    <option value="IND">Indian Rupee</option>
-                    <option value="USD">US Dollar</option>
-                </select>
-            </div>
-
-            <div className="flex flex-row mb-3">
-                <label className="w-1/3 mr-2">Expense</label>
-                <div className="w-full flex flex-row">
-                    <input type="text" className="w-full h-11 border border-gray-300 outline-blue-400 rounded p-1" value={amount} onChange={e => setAmount(e.target.value)}/>
-                    { currency === 'USD' && <label className="p-2"><i className="bi bi-arrow-left-right"></i></label> }
-                    { currency === 'USD' && 
-                    <span className="w-full h-11 justify-center border border-gray-300 outline-blue-400 rounded p-1 disabled:bg-gray-400" aria-disabled><i className="bi bi-currency-rupee p-1"></i>{usdToIndConversion(amount)}</span> }
-                </div>
-            </div>
-
-            <div className="flex flex-row mb-3">
-                <label className="w-1/3 mr-2">Payment Mode</label>
-                <select className="w-full h-11 border border-gray-300 outline-blue-400 rounded p-1" value={payType} onChange={e => setPayType(e.target.value)}>
-                    <option value="cash">Cash</option>
-                    <option value="card">Card</option>
-                </select>
-            </div>
-
-            <div className="flex flex-row mb-3">
-                <button className="w-1/4 text-white bg-blue-400 border-2 border-blue-600 rounded m-2 p-1" onClick={saveExpense}>Save</button>
-                <button className="w-1/4 text-black bg-gray-300 border-2 border-gray-400 rounded m-2 p-1" onClick={resetFields}>Reset</button>
-            </div>
-
         </div>
-        </>
-    )
+        
+        <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1"> Category </label>
+            <select name="category" value={expense.category} onChange={handleChange} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" required>
+                <option value="">Select a category</option>
+                {categories.map((category) => (
+                    <option key={category} value={category}>
+                    {category}
+                    </option>
+                ))}
+            </select>
+        </div>
+
+        <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1"> Description </label>
+            <input type="text" name="description" value={expense.description} onChange={handleChange} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="What was this expense for?" required/>
+        </div>
+
+        <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2"> Payment Method </label>
+            <div className="grid grid-cols-2 gap-2">
+            {Object.keys(paymentMethods).map((method) => (
+                <label key={method} className={`
+                    flex items-center p-3 rounded-md border cursor-pointer ${expense.paymentMethod === method ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:bg-gray-50'}`}>
+
+                <input type="radio" name="paymentMethod" value={method} checked={expense.paymentMethod === method} onChange={handleChange} className="hidden"/>
+                <div className={`w-4 h-4 rounded-full mr-2 ${paymentMethods[method]}`}></div>
+                <span className="text-sm">{method}</span>
+                { expense.paymentMethod === method && (
+                    <CheckIcon size={16} className="ml-auto text-blue-500" />
+                )}
+                </label>
+            ))}
+            </div>
+        </div>
+        <div className="flex justify-end space-x-3">
+            <button type="button" onClick={onCancel} className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Cancel
+            </button>
+            <button type="submit" className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" >
+                Add Expense
+            </button>
+        </div>
+    </form>
+)
 }
 
 export default NewExpense;
