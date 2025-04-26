@@ -1,6 +1,6 @@
-# Expense Manager
+# Expense Tracker
 
-Welcome to the Expense Manager, a comprehensive web application built using the MERN stack (MongoDB, Express, React, Node.js). This application allows users to manage their expenses efficiently by adding, viewing, editing, and deleting expense records.
+Welcome to the Expense Tracker, a comprehensive web application built using the MERN stack (MongoDB, Express, React, Node.js). This application allows users to manage their expenses efficiently by adding, viewing, editing, and deleting expense records.
 
 ## Features
 
@@ -25,7 +25,7 @@ Welcome to the Expense Manager, a comprehensive web application built using the 
 Ensure you have the following installed:
 
 - Node.js
-- npm (Node Package Manager)
+- npm (Node Package Tracker)
 - MongoDB
 
 ### Installation
@@ -33,7 +33,7 @@ Ensure you have the following installed:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/amaldevcm/Expense-Manager.git
+    git clone https://github.com/amaldevcm/Expense-Tracker.git
     cd expense-manager
     ```
 
@@ -70,7 +70,7 @@ JWT_SECRET=your_jwt_secret
     npm start
     ```
 
-    The backend server will run on `http://localhost:5000`.
+    The backend server will run on `http://localhost:3000`.
 
 2. **Start the frontend server:**
 
@@ -79,28 +79,21 @@ JWT_SECRET=your_jwt_secret
     npm start
     ```
 
-    The frontend will run on `http://localhost:3000`.
+    The frontend will run on `http://localhost:3001`.
 
 ## Folder Structure
 
 ```
-expense-manager/
+expense-tracker/
 ├── backend/          # Backend (Node.js + Express + MongoDB)
-│   ├── models/       # Mongoose models
-│   ├── routes/       # Express routes
-│   ├── controllers/  # Route controllers
-│   ├── middleware/   # Custom middleware
-│   ├── config/       # Configuration files (e.g., database connection)
-│   └── server.js     # Entry point for the backend server
+│   ├── Database/     # Configuration files (e.g., database connection)
+│   └── app.js        # Entry point for the backend server
 │
 └── frontend/         # Frontend (React)
     ├── public/       # Public files (e.g., index.html)
     ├── src/          # Source files
-        ├── components/   # Reusable components
-        ├── pages/        # Page components
-        ├── context/      # Context API for state management
-        ├── services/     # API service functions
+        ├── components/   # Page components
         └── App.js        # Entry point for the frontend
 ```
 
-Thank you for using the Expense Manager! Happy tracking!
+Thank you for using the Expense Tracker! Happy tracking!
