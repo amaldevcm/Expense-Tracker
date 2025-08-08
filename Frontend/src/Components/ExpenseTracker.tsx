@@ -5,9 +5,7 @@ import { MonthlySummary } from './MonthlySummary'
 import { PlusIcon } from 'lucide-react'
 import type { ExpenseSchema } from './Common/CommonSchema'
 
-
-const serverUrl = 'http://localhost:3000/api/';
-// const serverUrl = 'https://expense-manager-uqvh.onrender.com/api/';
+const serverUrl = import.meta.env.VITE_SERVER_URL + '/api/';
 
 export const ExpenseTracker = () => {
     const [expenses, setExpenses] = useState([])
