@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const expenseSchema = new mongoose.Schema({
-    expense_id: Number,
     title: String,
     description: {
         type: String,
@@ -12,8 +11,9 @@ const expenseSchema = new mongoose.Schema({
     currency: {
         type: String,
         required: true,
-        default: 'IND'
+        default: 'USD'
     },
+    exchangeRate: Number,
     paymentType: {
         type: String,
         default: 'cash',
