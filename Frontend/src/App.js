@@ -1,5 +1,4 @@
 import './App.css';
-import {useEffect, useState} from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { ExpenseTracker } from './Components/ExpenseTracker';
 // import moment from 'moment';

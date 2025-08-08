@@ -1,15 +1,10 @@
-import React from 'react'
 import { TrendingUpIcon, CreditCardIcon, PieChartIcon } from 'lucide-react'
-import { paymentMethods } from './ExpenseTracker'
-export const MonthlySummary = ({
-  totalExpenses,
-  expensesByPaymentMethod,
-  expensesByCategory,
-}) => {
-  const currentMonth = new Date().toLocaleString('default', {
-    month: 'long',
-    year: 'numeric',
-  })
+import { paymentMethods } from './ExpenseTracker';
+import moment from 'moment';
+
+export const MonthlySummary = ({totalExpenses, expensesByPaymentMethod, expensesByCategory}) => {
+  const currentMonth = moment().format('MMMM');
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <div className="flex items-center justify-between mb-6">
