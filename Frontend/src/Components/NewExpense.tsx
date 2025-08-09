@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { PaymentMethods } from './Common/CommonSchema'
+import type { PaymentMethodKey } from './Common/CommonSchema'
 import { CheckIcon } from 'lucide-react'
 import moment from 'moment'
 
@@ -167,7 +168,7 @@ export const ExpenseForm = ({ serverUrl, onSubmit }: Props) => {
                                 className="hidden"
                             />
                             <div
-                                className={`w-4 h-4 rounded-full mr-2 ${PaymentMethods[method]}`}
+                                className={`w-4 h-4 rounded-full mr-2 ${PaymentMethods[method as PaymentMethodKey]}`}
                             ></div>
                             <span className="text-sm dark:text-gray-300">{makeTitle(method)}</span>
                             {expense.paymentType === method && (

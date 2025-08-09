@@ -1,5 +1,5 @@
-import { CalendarIcon, CreditCardIcon } from 'lucide-react';
-import type { ExpenseSchema } from './Common/CommonSchema';
+import { CalendarIcon } from 'lucide-react';
+import type { ExpenseSchema, PaymentMethodKey } from './Common/CommonSchema';
 import { PaymentMethods } from './Common/CommonSchema';
 import moment from 'moment';
 
@@ -9,7 +9,8 @@ interface Props {
 
 export const ExpenseList = ({ expenses }: Props) => {
     // Sort expenses by date (most recent first)
-    const sortedExpenses = [...expenses].sort((a, b) => b.createdDate - a.createdDate)
+    // const sortedExpenses = [...expenses].sort((a, b) => b.createdDate - a.createdDate)
+    const sortedExpenses = expenses;
     // Format date to display
     const formatDate = (date: Date) => {
         // return new Intl.DateTimeFormat('en-US', {
@@ -60,7 +61,7 @@ export const ExpenseList = ({ expenses }: Props) => {
                                 </div>
                                 <div className="flex items-center">
                                     <div
-                                        className={`w-3 h-3 rounded-full mr-1.5 ${PaymentMethods[expense.paymentType]}`}
+                                        className={`w-3 h-3 rounded-full mr-1.5 ${PaymentMethods[expense.paymentType as PaymentMethodKey]}`}
                                     ></div>
                                     <span className="text-gray-600 dark:text-gray-300">
                                         {makeTitle(expense.paymentType)}

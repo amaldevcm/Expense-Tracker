@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ExpenseForm } from './NewExpense'
 import { ExpenseList } from './ExpenseList'
-import { MonthlySummary } from './MonthlySummary'
-import { PlusIcon } from 'lucide-react'
-import type { ExpenseSchema } from './Common/CommonSchema'
 
 const serverUrl = import.meta.env.VITE_SERVER_URL + '/api/';
 
 export const ExpenseTracker = () => {
     const [expenses, setExpenses] = useState([])
-    const [showForm, setShowForm] = useState(true)
+    const [showForm] = useState(true)
 
     const getAllExpenses = () => {
         fetch(serverUrl + 'expenses').then(res => res.json())
@@ -30,18 +27,18 @@ export const ExpenseTracker = () => {
     }, []);
 
     const evaluateStatistics = () => {
-        const currentMonthExpenses = expenses.filter((expense: ExpenseSchema) => {
-            const now = new Date();
-            return (
-                new Date(expense.createdDate).getMonth() === now.getMonth() &&
-                new Date(expense.createdDate).getFullYear() === now.getFullYear()
-            )
-        })
+        // const currentMonthExpenses = expenses.filter((expense: ExpenseSchema) => {
+        //     const now = new Date();
+        //     return (
+        //         new Date(expense.createdDate).getMonth() === now.getMonth() &&
+        //         new Date(expense.createdDate).getFullYear() === now.getFullYear()
+        //     )
+        // })
 
-        const totalExpenses = currentMonthExpenses.reduce(
-            (sum, expense) => sum + expense.amount,
-            0,
-        )
+        // const totalExpenses = currentMonthExpenses.reduce(
+        //     (sum, expense: ExpenseSchema) => sum + expense.amount,
+        //     0,
+        // )
     }
 
     const addExpense = () => {

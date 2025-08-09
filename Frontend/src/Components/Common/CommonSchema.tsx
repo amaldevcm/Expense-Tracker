@@ -1,11 +1,11 @@
 export interface ExpenseSchema {
-    title: String,
-    amount: Number,
-    category: String,
-    description: String,
-    currency: String,
-    exchangeRate: Number,
-    paymentType: String,
+    title: string,
+    amount: number,
+    category: string,
+    description: string,
+    currency: string,
+    exchangeRate: number,
+    paymentType: string,
     createdDate: Date
 }
 
@@ -17,3 +17,5 @@ export const PaymentMethods = {
     'Bank Transfer': 'bg-indigo-600',
     'Mobile Payment': 'bg-purple-500',
 }
+
+export type PaymentMethodKey = keyof typeof PaymentMethods;

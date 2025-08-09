@@ -1,11 +1,19 @@
 import { TrendingUpIcon, CreditCardIcon, PieChartIcon } from 'lucide-react'
 import { PaymentMethods } from './Common/CommonSchema'
+import type { PaymentMethodKey } from './Common/CommonSchema'
 
-export const MonthlySummary = ({ totalExpenses, expensesByPaymentMethod, expensesByCategory, }) => {
+interface Prop {
+    totalExpenses: Number,
+    expensesByPaymentMethod: Object,
+    expensesByCategory: Object
+}
+
+export const MonthlySummary = ({ totalExpenses, expensesByPaymentMethod, expensesByCategory }: Prop) => {
     const currentMonth = new Date().toLocaleString('default', {
         month: 'long',
         year: 'numeric',
     })
+
     return (
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
             <div className="flex items-center justify-between mb-6">
@@ -46,7 +54,7 @@ export const MonthlySummary = ({ totalExpenses, expensesByPaymentMethod, expense
                         <div key={method} className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <div
-                                    className={`w-3 h-3 rounded-full mr-2 ${PaymentMethods[method]}`}
+                                    className={`w-3 h-3 rounded-full mr-2 ${PaymentMethods[method as PaymentMethodKey]}`}
                                 ></div>
                                 <span className="text-sm text-gray-600 dark:text-gray-400">
                                     {method}
