@@ -51,7 +51,7 @@ export const ExpenseTracker = () => {
             <header className="mb-8 flex justify-between items-center">
                 <div>
                     <h1 className="text-3xl font-bold text-blue-800 dark:text-blue-400">
-                        Expense Tracker
+                        PayBook
                     </h1>
                     <p className="text-slate-600 dark:text-slate-400">
                         Keep track of your daily expenses
