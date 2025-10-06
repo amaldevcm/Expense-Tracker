@@ -14,6 +14,7 @@ const port = process.env.PORT || 3000;  //To use environment variable as port nu
 // Getting all records
 app.get('/api/expenses', (req, res) => {
     db.find().then((result) => {
+        result.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
         res.send({ 'expenses': result });
     }).catch(err => {
         console.log(err);

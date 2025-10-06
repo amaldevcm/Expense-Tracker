@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { PaymentMethods } from './Common/CommonSchema'
 import type { PaymentMethodKey } from './Common/CommonSchema'
+import { Categories } from './Common/CommonSchema'
 import { CheckIcon } from 'lucide-react'
 import moment from 'moment'
 
@@ -20,19 +21,6 @@ export const ExpenseForm = ({ serverUrl, onSubmit }: Props) => {
         createdDate: '',
         paymentType: 'credit',
     })
-
-    const categories = [
-        'Groceries',
-        'Transportation',
-        'Dining',
-        'Entertainment',
-        'Shopping',
-        'Utilities',
-        'Healthcare',
-        'Education',
-        'Travel',
-        'Other',
-    ]
 
     const handleChange = (e: { target: { name: any; value: any } }) => {
         const { name, value } = e.target
@@ -125,7 +113,7 @@ export const ExpenseForm = ({ serverUrl, onSubmit }: Props) => {
                     required
                 >
                     <option value="">Select a category</option>
-                    {categories.map((category) => (
+                    {Categories.map((category) => (
                         <option key={category} value={category}>
                             {category}
                         </option>

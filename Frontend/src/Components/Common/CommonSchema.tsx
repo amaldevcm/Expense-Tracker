@@ -18,4 +18,17 @@ export const PaymentMethods = {
     'Mobile Payment': 'bg-purple-500',
 }
 
+export const Categories = [
+    'Groceries',
+    'Transportation',
+    'Dining',
+    'Entertainment',
+    'Shopping',
+    'Utilities',
+    'Healthcare',
+    'Education',
+    'Travel',
+    'Other',
+]
+
 export type PaymentMethodKey = keyof typeof PaymentMethods;

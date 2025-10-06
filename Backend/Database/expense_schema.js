@@ -8,6 +8,7 @@ const expenseSchema = new mongoose.Schema({
         required: false
     },
     amount: Number,
+    category: String,
     currency: {
         type: String,
         required: true,
